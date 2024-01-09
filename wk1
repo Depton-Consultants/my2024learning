@@ -1,0 +1,84 @@
+initialize git
+set up authentication
+Git clone http (github code)
+git pull.. to the working directory
+git remote -v (verify pull/fetch)
+Always work in the checkout branch 
+git pull
+git add . (add all changes)
+git commit -m "commit message"
+git push origin master
+# Troubleshooting:
+- If you get an error saying that your local and remote branches are behind, do a hard reset
+bash
+git fetch --all
+git reset --hard @{u}
+This will bring your local repository back to where it was when you did the last 'git pull'.
+# Creating new files or adding existing ones to the project
+If you want to add a file that is not already tracked by Git, use this command:
+git add .   
+Then follow the steps above.
+To remove something from the repository, use the following commands:
+git rm <file>   # To delete a specific file
+git rm          # To delete everything in the current folder
+In both cases, you'll be asked for confirmation before proceeding with the deletion.</
+</s>
+# Merge branches
+When merging two branches together, there can be conflicts between them. In such case, you need
+to resolve those conflicts manually. Here is how you can merge `dev` into `master`:
+sh
+$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 10 commits.
+(use "git push" to publish your local commits)
+nothing to commit, working tree clean
+$ git merge dev
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.
+$ _
+You must edit the file README.md by hand to resolve the conflict.
+Make me a sandwich
+$ vim README.md
+[do some editing]
+:wq
+$ git status
+On branch master
+Conflicted: README.md
+Unmerged paths:
+(use "git add <file>..." to mark resolution)
+both added:      README.md
+Untracked files:
+(use "git add <file>..." to include in what will be committed)
+.DS_Store
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git add README.md
+$ git status
+On branch master
+All conflicts fixed but you are still merging.
+(use "git commit" to conclude merge)
+Changes to be committed:
+modified:   README.md
+$ git commit -m "Merge README from dev."
+[master f76b54d] Merge README from dev.
+</s>
+# How git revert works
+The `git revert` command allows us to undo a specific commit. It creates a new
+commit that reverts the change made by a previous commit. This means it essentially
+creates a new commit with the inverse content of the specified commit. The process
+of creating this new commit involves generating diffs between the parent commit
+and the specified commit, applying these diffs in reverse order, and committing
+the results as a new commit.
+# Git fetch
+Git fetch is used when we want to download objects and refs from another repository.
+It's similar to git clone except instead of cloning the entire repo, git fetch only
+downloads specific information like commits or tags. You can use git fetch to keep your
+local repository up-to-date without having to do a full checkout.
+# git pull
+Git pull is a combination of git fetch and git merge. When you run git pull, it first
+fetches the latest code from the remote repository using git fetch. Then it tries to
+merge the retrieved branches into your current working tree. If there are any conflicts
+between the two sets of changes, git pull will pause and allow you to resolve those
+conflicts before continuing. Once all conflicts have been resolved, git pull will finish
+updating your local repository.</s>
+======================================================================================
